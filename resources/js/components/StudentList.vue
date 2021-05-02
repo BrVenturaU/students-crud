@@ -128,8 +128,11 @@ export default {
             let data = response.data;
             this.students = data;
         },
-        deleteById(id){
-            console.log(id);
+        async deleteById(id){
+            let response = await axios.delete(`students/${id}`);
+            let data = response.data;
+            await this.get();
+            alert(data.message);
         },
         showModal(id){
             $(id).modal('show');

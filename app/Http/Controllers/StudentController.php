@@ -64,6 +64,10 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $student = Student::find($id);
+        if($student == null)
+            return ["message" => "El registro solicitado no existe."];
+        $student->delete();
+        return ["message" => "Registro eliminado con éxito."];
     }
 }

@@ -2112,7 +2112,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     deleteById: function deleteById(id) {
-      console.log(id);
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var response, data;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios["delete"]("students/".concat(id));
+
+              case 2:
+                response = _context3.sent;
+                data = response.data;
+                _context3.next = 6;
+                return _this3.get();
+
+              case 6:
+                alert(data.message);
+
+              case 7:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
     },
     showModal: function showModal(id) {
       $(id).modal('show');
