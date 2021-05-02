@@ -2002,6 +2002,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -2017,6 +2035,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       students: [],
       order: true,
       code: '',
+      isLoading: true,
+      message: '',
       perPage: 4,
       pagination: {
         total: 0,
@@ -2026,12 +2046,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         from: 0,
         to: 0
       },
-      offset: 3
+      offset: 2
     };
   },
   watch: {
     code: function code() {
       var vm = this;
+      vm.isLoading = true;
       vm.debouncedGet();
     }
   },
@@ -2085,12 +2106,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 vm = _this2;
+                vm.isLoading = true;
                 page = _this2.pagination.current_page;
                 url = "students?code=".concat(vm.code, "&page=").concat(page, "&perPage=").concat(vm.perPage, "&order=").concat(vm.order);
-                _context2.next = 5;
+                _context2.next = 6;
                 return axios.get(url);
 
-              case 5:
+              case 6:
                 response = _context2.sent.data;
                 vm.pagination = {
                   total: response.total,
@@ -2102,8 +2124,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 };
                 data = response.data;
                 _this2.students = data;
+                vm.isLoading = false;
 
-              case 9:
+              case 11:
               case "end":
                 return _context2.stop();
             }
@@ -2126,11 +2149,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 2:
                 response = _context3.sent;
                 data = response.data;
-                _context3.next = 6;
-                return _this3.get();
+                _this3.message = data.message;
 
-              case 6:
-                alert(data.message);
+                _this3.showToast("#toast-".concat(id));
+
+                _.delay(_this3.get, 600);
 
               case 7:
               case "end":
@@ -2142,6 +2165,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     showModal: function showModal(id) {
       $(id).modal('show');
+    },
+    showToast: function showToast(id) {
+      $(id).toast('show');
     },
     changePage: function changePage(page) {
       this.pagination.current_page = page;
@@ -41763,90 +41789,179 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "mb-3 row" },
-      _vm._l(_vm.students, function(student) {
-        return _c(
+    _vm.isLoading
+      ? _c(
           "div",
-          { key: student.id, staticClass: "col-sm-3" },
+          { staticClass: "text-center" },
           [
-            _c("div", { staticClass: "mb-4 shadow card" }, [
-              _c("div", { staticClass: "card-body" }, [
-                _c("h3", { staticClass: "card-title" }, [
-                  _vm._v(_vm._s(student.full_name))
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "card-text" }, [
-                  _vm._v("Datos del estudiante:")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("ul", { staticClass: "list-group list-group-flush" }, [
-                _c("li", { staticClass: "list-group-item" }, [
-                  _vm._v(
-                    "Genero: " +
-                      _vm._s(student.gender == "F" ? "Femenino" : "Masculino")
-                  )
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "list-group-item" }, [
-                  _vm._v("Edad: " + _vm._s(student.age))
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-body" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "shadow btn btn-success",
-                    attrs: { "data-toggle": "modal" },
-                    on: {
-                      click: function($event) {
-                        return _vm.showModal("#modal-" + student.id)
-                      }
-                    }
-                  },
-                  [
-                    _c("feather", {
-                      staticClass: "align-middle",
-                      attrs: { type: "eye", size: "20" }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "shadow btn btn-danger",
-                    on: {
-                      click: function($event) {
-                        return _vm.deleteById(student.id)
-                      }
-                    }
-                  },
-                  [
-                    _c("feather", {
-                      staticClass: "align-middle",
-                      attrs: { type: "trash-2", size: "20" }
-                    })
-                  ],
-                  1
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("ShowStudent", { attrs: { student: student } })
+            _c("feather", {
+              staticClass: "text-muted",
+              attrs: {
+                type: "loader",
+                animation: "spin",
+                "animation-speed": "fast",
+                size: "4rem"
+              }
+            })
           ],
           1
         )
-      }),
-      0
-    )
+      : _c(
+          "div",
+          { staticClass: "mb-3 row" },
+          _vm._l(_vm.students, function(student) {
+            return _c(
+              "div",
+              { key: student.id, staticClass: "col-sm-3" },
+              [
+                _c("div", { staticClass: "mb-4 shadow card" }, [
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("h3", { staticClass: "card-title" }, [
+                      _vm._v(_vm._s(student.full_name))
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "card-text" }, [
+                      _vm._v("Datos del estudiante:")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("ul", { staticClass: "list-group list-group-flush" }, [
+                    _c("li", { staticClass: "list-group-item" }, [
+                      _vm._v(
+                        "Genero: " +
+                          _vm._s(
+                            student.gender == "F" ? "Femenino" : "Masculino"
+                          )
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "list-group-item" }, [
+                      _vm._v("Edad: " + _vm._s(student.age))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-body" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "shadow btn btn-success",
+                        attrs: { "data-toggle": "modal" },
+                        on: {
+                          click: function($event) {
+                            return _vm.showModal("#modal-" + student.id)
+                          }
+                        }
+                      },
+                      [
+                        _c("feather", {
+                          staticClass: "align-middle",
+                          attrs: { type: "eye", size: "20" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "shadow btn btn-danger",
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteById(student.id)
+                          }
+                        }
+                      },
+                      [
+                        _c("feather", {
+                          staticClass: "align-middle",
+                          attrs: { type: "trash-2", size: "20" }
+                        })
+                      ],
+                      1
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("ShowStudent", { attrs: { student: student } }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "bottom-0 right-0 p-3 position-fixed",
+                    staticStyle: { "z-index": "5", right: "0", bottom: "0" }
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "toast hide",
+                        attrs: {
+                          id: "toast-" + student.id,
+                          role: "alert",
+                          "aria-live": "assertive",
+                          "aria-atomic": "true",
+                          "data-delay": "600"
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "toast-header" },
+                          [
+                            _c("feather", {
+                              staticClass: "mr-2 align-middle text-success",
+                              attrs: { type: "check-circle", size: "20" }
+                            }),
+                            _vm._v(" "),
+                            _c("strong", { staticClass: "mr-auto" }, [
+                              _vm._v("App")
+                            ]),
+                            _vm._v(" "),
+                            _c("small", [_vm._v("Now")]),
+                            _vm._v(" "),
+                            _vm._m(0, true)
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "toast-body" }, [
+                          _vm._v(
+                            "\r\n                        " +
+                              _vm._s(_vm.message) +
+                              "\r\n                    "
+                          )
+                        ])
+                      ]
+                    )
+                  ]
+                )
+              ],
+              1
+            )
+          }),
+          0
+        )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "mb-1 ml-2 close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "toast",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  }
+]
 render._withStripped = true
 
 

@@ -42,7 +42,10 @@
         </div>
     </form>
     
-    <div class="mb-3 row">    
+    <div class="text-center" v-if="isLoading">
+        <feather class="text-muted" type="loader" animation="spin" animation-speed="fast" size="4rem"></feather>
+    </div>
+    <div class="mb-3 row" v-else>    
         <div class="col-sm-3" v-for="student of students" :key="student.id">
             <div class="mb-4 shadow card">
                 <div class="card-body">
@@ -60,6 +63,21 @@
                 </div>
             </div>
             <ShowStudent :student="student" />
+            <div class="bottom-0 right-0 p-3 position-fixed" style="z-index: 5; right: 0; bottom: 0;">
+                <div :id="`toast-${student.id}`" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="600">
+                    <div class="toast-header">
+                        <feather type="check-circle" class="mr-2 align-middle text-success" size="20"></feather>
+                        <strong class="mr-auto">App</strong>
+                        <small>Now</small>
+                        <button type="button" class="mb-1 ml-2 close" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        {{message}}
+                    </div>
+                </div>
+            </div>
         </div>        
     </div>
 </div>
@@ -81,14 +99,17 @@ export default {
             students: [],
             order: true,
             code: '',
+            isLoading: true,
+            message: '',
             perPage: 4,
             pagination:{total:0, current_page:0, per_page:0, last_page:0, from:0, to:0},
-            offset: 3
+            offset: 2
         }
     },
     watch:{
         code: function(){
             let vm = this;
+            vm.isLoading = true;
             vm.debouncedGet();
         }
     },
@@ -121,21 +142,27 @@ export default {
         },
         async get(){
             let vm = this;
+            vm.isLoading = true;
             let page = this.pagination.current_page;
             let url = `students?code=${vm.code}&page=${page}&perPage=${vm.perPage}&order=${vm.order}`;
             let response = (await axios.get(url)).data;
             vm.pagination = {total:response.total, current_page:response.current_page, per_page:response.per_page, last_page:response.last_page, from:response.from, to:response.to};
             let data = response.data;
             this.students = data;
+            vm.isLoading = false;
         },
         async deleteById(id){
             let response = await axios.delete(`students/${id}`);
             let data = response.data;
-            await this.get();
-            alert(data.message);
+            this.message = data.message;
+            this.showToast(`#toast-${id}`);
+            _.delay(this.get, 600);
         },
         showModal(id){
             $(id).modal('show');
+        },
+        showToast(id){
+            $(id).toast('show');
         },
         changePage(page){
             this.pagination.current_page = page;
