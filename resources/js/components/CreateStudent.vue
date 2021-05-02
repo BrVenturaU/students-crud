@@ -120,6 +120,7 @@
 
 <script>
 export default {
+    name: 'CreateStudent',
     data () {
         return {
             students: {
@@ -134,7 +135,13 @@ export default {
     methods: {
         async addStudent(){
             try {
-                const res = await axios.post('students/' + this.students);
+                this.axios
+                .post('students/' + this.students)
+                .then(respose => (
+                    this.students = respose.data
+                ))
+                // const res = await axios.post('students/' + this.students);
+                // this.students = res.data;
             }
             catch(e) {
                 console.log(e.message)

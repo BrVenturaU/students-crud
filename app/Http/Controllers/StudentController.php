@@ -39,21 +39,10 @@ class StudentController extends Controller
             'code' => 'required'
         ]);
 
-        $student = new Student();
+        $students = Student::all();
         
-        $student->save();
+        $students->save();
         return response()->json();
-
-        // $article = new Article($request->except('image'));
-        // if($request->file()){
-        //     $image = $request->file('image');
-        //     $fileName = time().'_'.$image->getClientOriginalName();
-        //     $filePath = $image->storeAs('images', $fileName, 'public');
-        //     $article->image = $filePath;
-        // }
-
-        // $article->save();
-        // return response()->json('Registro creado con exito.');
     }
 
     /**

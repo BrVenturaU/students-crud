@@ -2017,6 +2017,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'CreateStudent',
   data: function data() {
     return {
       students: {
@@ -2033,34 +2034,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.prev = 0;
-                _context.next = 3;
-                return axios.post('students/' + _this.students);
+                try {
+                  _this.axios.post('students/' + _this.students).then(function (respose) {
+                    return _this.students = respose.data;
+                  }); // const res = await axios.post('students/' + this.students);
+                  // this.students = res.data;
 
-              case 3:
-                res = _context.sent;
-                _context.next = 9;
-                break;
+                } catch (e) {
+                  console.log(e.message);
+                }
 
-              case 6:
-                _context.prev = 6;
-                _context.t0 = _context["catch"](0);
-                console.log(_context.t0.message);
-
-              case 9:
                 _this.students();
 
-              case 10:
+              case 2:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 6]]);
+        }, _callee);
       }))();
     },
     openModal: function openModal() {
