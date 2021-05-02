@@ -6,7 +6,7 @@
     },
     "servers": [
         {
-            "url": "http://127.0.0.1:8000/api"
+            "url": "http://127.0.0.1:8000/api/v1"
         }
     ],
     "paths": {
@@ -16,7 +16,7 @@
                     "Students"
                 ],
                 "summary": "Muestra un listado de estudiantes paginado.",
-                "operationId": "App\\Http\\Controllers\\StudentController::index",
+                "operationId": "App\\Http\\Controllers\\Api\\v1\\StudentController::index",
                 "parameters": [
                     {
                         "name": "code",
@@ -108,7 +108,7 @@
                     "Students"
                 ],
                 "summary": "Permite crear un estudiante.",
-                "operationId": "App\\Http\\Controllers\\StudentController::store",
+                "operationId": "App\\Http\\Controllers\\Api\\v1\\StudentController::store",
                 "requestBody": {
                     "description": "Objeto de solicitud de datos del estudiante.",
                     "required": true,
@@ -174,7 +174,7 @@
                     "Students"
                 ],
                 "summary": "Permite crear un estudiante.",
-                "operationId": "App\\Http\\Controllers\\StudentController::update",
+                "operationId": "App\\Http\\Controllers\\Api\\v1\\StudentController::update",
                 "parameters": [
                     {
                         "name": "id",
@@ -265,7 +265,7 @@
                     "Students"
                 ],
                 "summary": "Permite eliminar un estudiante.",
-                "operationId": "App\\Http\\Controllers\\StudentController::destroy",
+                "operationId": "App\\Http\\Controllers\\Api\\v1\\StudentController::destroy",
                 "parameters": [
                     {
                         "name": "id",
