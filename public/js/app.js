@@ -1982,18 +1982,41 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     ShowStudent: _ShowStudent_vue__WEBPACK_IMPORTED_MODULE_1__.default
   },
   created: function created() {
-    this.get();
+    var vm = this;
+    vm.debouncedGet = _.debounce(vm.get, 500);
+    vm.get();
   },
   data: function data() {
     return {
       students: [],
       order: true,
+      code: '',
+      perPage: 4,
       pagination: {
         total: 0,
         current_page: 0,
@@ -2004,6 +2027,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       },
       offset: 3
     };
+  },
+  watch: {
+    code: function code() {
+      var vm = this;
+      vm.debouncedGet();
+    }
   },
   computed: {
     isActive: function isActive() {
@@ -2035,7 +2064,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return _this.get(_this.pagination.current_page);
+                return _this.get();
 
               case 2:
               case "end":
@@ -2046,21 +2075,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     get: function get() {
-      var _arguments = arguments,
-          _this2 = this;
+      var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var page, vm, response, data;
+        var vm, page, url, response, data;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                page = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
                 vm = _this2;
-                _context2.next = 4;
-                return axios.get("students?page=".concat(page, "&order=").concat(vm.order));
+                page = _this2.pagination.current_page;
+                url = "students?code=".concat(vm.code, "&page=").concat(page, "&perPage=").concat(vm.perPage, "&order=").concat(vm.order);
+                _context2.next = 5;
+                return axios.get(url);
 
-              case 4:
+              case 5:
                 response = _context2.sent.data;
                 vm.pagination = {
                   total: response.total,
@@ -2073,7 +2102,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 data = response.data;
                 _this2.students = data;
 
-              case 8:
+              case 9:
               case "end":
                 return _context2.stop();
             }
@@ -2089,7 +2118,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     changePage: function changePage(page) {
       this.pagination.current_page = page;
-      this.get(page);
+      this.get();
+    },
+    onChangePerPage: function onChangePerPage() {
+      this.get();
     }
   }
 });
@@ -41488,222 +41520,300 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "mb-4 custom-control custom-switch" }, [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.order,
-            expression: "order"
-          }
-        ],
-        staticClass: "custom-control-input",
-        attrs: { type: "checkbox", name: "order", id: "order" },
-        domProps: {
-          checked: Array.isArray(_vm.order)
-            ? _vm._i(_vm.order, null) > -1
-            : _vm.order
-        },
-        on: {
-          change: [
-            function($event) {
-              var $$a = _vm.order,
-                $$el = $event.target,
-                $$c = $$el.checked ? true : false
-              if (Array.isArray($$a)) {
-                var $$v = null,
-                  $$i = _vm._i($$a, $$v)
-                if ($$el.checked) {
-                  $$i < 0 && (_vm.order = $$a.concat([$$v]))
-                } else {
-                  $$i > -1 &&
-                    (_vm.order = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+    _c("form", { staticClass: "mb-4" }, [
+      _c("div", { staticClass: "form-row align-items-center" }, [
+        _c("div", { staticClass: "col col-sm-6" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.code,
+                expression: "code"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "Código..." },
+            domProps: { value: _vm.code },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
                 }
-              } else {
-                _vm.order = $$c
+                _vm.code = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col" }, [
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.perPage,
+                  expression: "perPage"
+                }
+              ],
+              staticClass: "form-control",
+              on: {
+                change: [
+                  function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.perPage = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  },
+                  _vm.onChangePerPage
+                ]
               }
             },
-            function($event) {
-              return _vm.orderStudents()
-            }
-          ]
-        }
-      }),
-      _vm._v(" "),
-      _c(
-        "label",
-        { staticClass: "custom-control-label", attrs: { for: "order" } },
-        [_vm._v(_vm._s(_vm.order == 1 ? "Ascendente" : "Descendente"))]
-      )
+            [
+              _c("option", [_vm._v("4")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("8")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("16")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("32")])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col" }, [
+          _c("div", { staticClass: "custom-control custom-switch" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.order,
+                  expression: "order"
+                }
+              ],
+              staticClass: "custom-control-input",
+              attrs: { type: "checkbox", name: "order", id: "order" },
+              domProps: {
+                checked: Array.isArray(_vm.order)
+                  ? _vm._i(_vm.order, null) > -1
+                  : _vm.order
+              },
+              on: {
+                change: [
+                  function($event) {
+                    var $$a = _vm.order,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = null,
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 && (_vm.order = $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          (_vm.order = $$a
+                            .slice(0, $$i)
+                            .concat($$a.slice($$i + 1)))
+                      }
+                    } else {
+                      _vm.order = $$c
+                    }
+                  },
+                  function($event) {
+                    return _vm.orderStudents()
+                  }
+                ]
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              { staticClass: "custom-control-label", attrs: { for: "order" } },
+              [_vm._v(_vm._s(_vm.order == 1 ? "Ascendente" : "Descendente"))]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col col-sm-3" }, [
+          _vm.pagination.total > 0
+            ? _c("nav", [
+                _c(
+                  "ul",
+                  { staticClass: "pagination justify-content-end" },
+                  [
+                    _vm.pagination.current_page > 1
+                      ? _c("li", { staticClass: "page-item" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "page-link",
+                              attrs: { href: "#", "aria-label": "Previous" },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.changePage(
+                                    _vm.pagination.current_page - 1
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("span", { attrs: { "aria-hidden": "true" } }, [
+                                _vm._v("«")
+                              ])
+                            ]
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm._l(_vm.pagesNumber, function(page, index) {
+                      return _c(
+                        "li",
+                        {
+                          key: index,
+                          staticClass: "page-item",
+                          class: [page == _vm.isActive ? "active" : ""]
+                        },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "page-link",
+                              attrs: { href: "#" },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.changePage(page)
+                                }
+                              }
+                            },
+                            [_vm._v(_vm._s(page))]
+                          )
+                        ]
+                      )
+                    }),
+                    _vm._v(" "),
+                    _vm.pagination.current_page < _vm.pagination.last_page
+                      ? _c("li", { staticClass: "page-item" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "page-link",
+                              attrs: { href: "#", "aria-label": "Next" },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.changePage(
+                                    _vm.pagination.current_page + 1
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("span", { attrs: { "aria-hidden": "true" } }, [
+                                _vm._v("»")
+                              ])
+                            ]
+                          )
+                        ])
+                      : _vm._e()
+                  ],
+                  2
+                )
+              ])
+            : _vm._e()
+        ])
+      ])
     ]),
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "row justify-content-center" },
-      [
-        _vm._l(_vm.students, function(student) {
-          return _c("div", { key: student.id, staticClass: "col-sm-3" }, [
-            _c("div", { staticClass: "mb-4 shadow card" }, [
-              _c("div", { staticClass: "card-body" }, [
-                _c("h3", { staticClass: "card-title" }, [
-                  _vm._v(_vm._s(student.full_name))
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "card-text" }, [
-                  _vm._v("Datos del estudiante:")
-                ])
+      { staticClass: "mb-3 row" },
+      _vm._l(_vm.students, function(student) {
+        return _c("div", { key: student.id, staticClass: "col-sm-3" }, [
+          _c("div", { staticClass: "mb-4 shadow card" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _c("h3", { staticClass: "card-title" }, [
+                _vm._v(_vm._s(student.full_name))
               ]),
               _vm._v(" "),
-              _c("ul", { staticClass: "list-group list-group-flush" }, [
-                _c("li", { staticClass: "list-group-item" }, [
-                  _vm._v(
-                    "Genero: " +
-                      _vm._s(student.gender == "F" ? "Femenino" : "Masculino")
-                  )
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "list-group-item" }, [
-                  _vm._v("Edad: " + _vm._s(student.age))
-                ])
+              _c("p", { staticClass: "card-text" }, [
+                _vm._v("Datos del estudiante:")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("ul", { staticClass: "list-group list-group-flush" }, [
+              _c("li", { staticClass: "list-group-item" }, [
+                _vm._v(
+                  "Genero: " +
+                    _vm._s(student.gender == "F" ? "Femenino" : "Masculino")
+                )
               ]),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "card-body" },
-                [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "shadow btn btn-success",
-                      attrs: { href: "#", "data-toggle": "modal" },
-                      on: {
-                        click: function($event) {
-                          return _vm.showModal(
-                            "#" + student.name + "-" + student.id
-                          )
-                        }
-                      }
-                    },
-                    [
-                      _c("feather", {
-                        staticClass: "align-middle",
-                        attrs: { type: "eye", size: "20" }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("ShowStudent", { attrs: { student: student } }),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "shadow btn btn-danger",
-                      attrs: { href: "#" }
-                    },
-                    [
-                      _c("feather", {
-                        staticClass: "align-middle",
-                        attrs: { type: "trash-2", size: "20" }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ])
-          ])
-        }),
-        _vm._v(" "),
-        _c("nav", [
-          _c(
-            "ul",
-            { staticClass: "pagination" },
-            [
-              _vm.pagination.current_page > 1
-                ? _c("li", { staticClass: "page-item" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "page-link",
-                        attrs: { href: "#", "aria-label": "Previous" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.changePage(
-                              _vm.pagination.current_page - 1
-                            )
-                          }
-                        }
-                      },
-                      [
-                        _c("span", { attrs: { "aria-hidden": "true" } }, [
-                          _vm._v("«")
-                        ])
-                      ]
-                    )
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm._l(_vm.pagesNumber, function(page, index) {
-                return _c(
-                  "li",
+              _c("li", { staticClass: "list-group-item" }, [
+                _vm._v("Edad: " + _vm._s(student.age))
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "card-body" },
+              [
+                _c(
+                  "button",
                   {
-                    key: index,
-                    staticClass: "page-item",
-                    class: [page == _vm.isActive ? "active" : ""]
+                    staticClass: "shadow btn btn-success",
+                    attrs: { href: "#", "data-toggle": "modal" },
+                    on: {
+                      click: function($event) {
+                        return _vm.showModal(
+                          "#" + student.name + "-" + student.id
+                        )
+                      }
+                    }
                   },
                   [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "page-link",
-                        attrs: { href: "#" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.changePage(page)
-                          }
-                        }
-                      },
-                      [_vm._v(_vm._s(page))]
-                    )
-                  ]
+                    _c("feather", {
+                      staticClass: "align-middle",
+                      attrs: { type: "eye", size: "20" }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("ShowStudent", { attrs: { student: student } }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "shadow btn btn-danger",
+                    attrs: { href: "#" }
+                  },
+                  [
+                    _c("feather", {
+                      staticClass: "align-middle",
+                      attrs: { type: "trash-2", size: "20" }
+                    })
+                  ],
+                  1
                 )
-              }),
-              _vm._v(" "),
-              _vm.pagination.current_page < _vm.pagination.last_page
-                ? _c("li", { staticClass: "page-item" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "page-link",
-                        attrs: { href: "#", "aria-label": "Next" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.changePage(
-                              _vm.pagination.current_page + 1
-                            )
-                          }
-                        }
-                      },
-                      [
-                        _c("span", { attrs: { "aria-hidden": "true" } }, [
-                          _vm._v("»")
-                        ])
-                      ]
-                    )
-                  ])
-                : _vm._e()
-            ],
-            2
-          )
+              ],
+              1
+            )
+          ])
         ])
-      ],
-      2
+      }),
+      0
     )
   ])
 }

@@ -14,8 +14,10 @@ class StudentController extends Controller
      */
     public function index(Request $request)
     {
+        $code = $request->input('code');
+        $perPage = $request->input('perPage');
         $order = filter_var($request->input('order'), FILTER_VALIDATE_BOOLEAN);
-        $students = Student::orderBy('id', $order ? 'ASC' : 'DESC')->paginate(4)->toArray();
+        $students = Student::where('code', 'like', "%$code%")->orderBy('id', $order ? 'ASC' : 'DESC')->paginate($perPage)->toArray();
         return $students;
     }
 
