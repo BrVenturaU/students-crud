@@ -2212,7 +2212,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js"
 
 vue__WEBPACK_IMPORTED_MODULE_4__.default.use((vue_axios__WEBPACK_IMPORTED_MODULE_1___default()), (axios__WEBPACK_IMPORTED_MODULE_2___default()));
 vue__WEBPACK_IMPORTED_MODULE_4__.default.use((vue_feather__WEBPACK_IMPORTED_MODULE_3___default()));
-(axios__WEBPACK_IMPORTED_MODULE_2___default().defaults.baseURL) = 'http://127.0.0.1:8000/api';
+(axios__WEBPACK_IMPORTED_MODULE_2___default().defaults.baseURL) = 'http://127.0.0.1:8000/api/v1';
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

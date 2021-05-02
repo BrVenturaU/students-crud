@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\v1;
 
+use App\Http\Controllers\Controller;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ use Illuminate\Http\Request;
     *    version="1.0"
     * )
 *
-* @OA\Server(url="http://127.0.0.1:8000/api")
+* @OA\Server(url="http://127.0.0.1:8000/api/v1")
 */
 
 class StudentController extends Controller
