@@ -1,14 +1,15 @@
 <template>
     <div class="container mt-5">
-        <Example />
+        <h1 class="mb-4">Listado de estudiantes</h1>
+        <StudentList />
     </div>
 </template>
 
 <script>
-import Example from './components/ExampleComponent.vue'
+import StudentList from './components/StudentList.vue'
     export default {
         components:{
-            Example
+            StudentList
         }
     }
 </script>
