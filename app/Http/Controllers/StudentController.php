@@ -119,7 +119,10 @@ class StudentController extends Controller
     */
     public function store(Request $request)
     {
-        //
+        /*
+        Student::create($request->all());
+        return response()->json(["message" => "Registro creado con éxito."], 201);
+        */
     }
 
     /**
@@ -169,7 +172,13 @@ class StudentController extends Controller
     */
     public function update(Request $request, $id)
     {
-        //
+        /*
+        $student = Student::find($id);
+        if($student == null)
+            return response()->json(["message" => "El registro solicitado no existe."], 404);    
+        $student->update($request->all());
+        return response()->json(["message" => "Registro actualizado con éxito."], 200);
+        */
     }
 
     /**
