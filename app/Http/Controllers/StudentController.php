@@ -29,7 +29,31 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        // requeridos
+        $this->validate($request, [
+            'name' => 'required',
+            'last_name' => 'required',
+            'birth_date' => 'required',
+            'gender' => 'required',
+            'code' => 'required'
+        ]);
+
+        $student = new Student();
+        
+        $student->save();
+        return response()->json();
+
+        // $article = new Article($request->except('image'));
+        // if($request->file()){
+        //     $image = $request->file('image');
+        //     $fileName = time().'_'.$image->getClientOriginalName();
+        //     $filePath = $image->storeAs('images', $fileName, 'public');
+        //     $article->image = $filePath;
+        // }
+
+        // $article->save();
+        // return response()->json('Registro creado con exito.');
     }
 
     /**

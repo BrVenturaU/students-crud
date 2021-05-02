@@ -10,7 +10,7 @@
             Crear/Agregar
         </button>
 
-            <!-- Start Modal -->
+        <!-- Start Modal -->
         <div 
             class="modal fade" 
             id="createModal"  
@@ -25,6 +25,7 @@
                         <button 
                             type="button" 
                             class="close" 
+                            @click="openModal();"
                             data-dismiss="modal" 
                             aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -32,13 +33,15 @@
                     </div>
                     <!-- Cuerpo/Contenido del Modal -->
                     <div class="modal-body">
-                        <form>
+                        <form @submit.prevent="addStudent()" class="needs-validation">
                             <div class="row">
                                 <div class="col">
                                     <label for="name">Nombre</label>
                                     <input 
                                         id="name"
-                                        type="text" 
+                                        type="text"
+                                        v-model="students.name"
+                                        required 
                                         class="form-control" 
                                         placeholder="Nombre">
                                 </div>
@@ -46,7 +49,9 @@
                                     <label for="lastname">Apellido</label>
                                     <input 
                                         id="lastname"
-                                        type="text" 
+                                        type="text"
+                                        v-model="students.last_name" 
+                                        required
                                         class="form-control" 
                                         placeholder="Apellido">
                                 </div>
@@ -57,23 +62,31 @@
                                     <input 
                                         id="date"
                                         type="date"
+                                        v-model="students.birth_date"
+                                        required
                                         class="form-control" >
                                 </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col">                                          
                                     <label for="inputState">Genero</label>
-                                    <select id="inputState" class="form-control">
+                                    <select 
+                                        id="inputState"
+                                        v-model="students.gender" 
+                                        required
+                                        class="form-control">
                                         <option selected>Seleccionar...</option>
                                         <option value="F">Femenino</option>
                                         <option value="M">Masculino</option>
-                                    </select>
+                                    </select>       
                                 </div>
                                 <div class="col">
                                     <label for="code">Codigo</label>
                                     <input 
                                         id="code"
-                                        type="text" 
+                                        type="text"
+                                        v-model="students.code"
+                                        required 
                                         class="form-control" 
                                         placeholder="Codigo de estudiante">
                                 </div>
@@ -85,12 +98,15 @@
                         <button 
                             type="button" 
                             class="btn btn-secondary" 
-                            data-dismiss="modal">
+                            data-dismiss="modal"
+                            @click="closeModal();">
                             Cancelar
                         </button>
                         <button 
                             type="button" 
-                            class="btn btn-primary">
+                            class="btn btn-primary"
+                            data-dismiss="modal"
+                            @click="addStudent()">
                             Guardar
                         </button>
                     </div>
@@ -104,6 +120,39 @@
 
 <script>
 export default {
+    data () {
+        return {
+            students: {
+                name: '',
+                last_name:'',
+                birth_date:'',
+                gender:'',
+                code:''
+            },
+        }
+    },
+    methods: {
+        async addStudent(){
+            try {
+                const res = await axios.post('students/' + this.students);
+            }
+            catch(e) {
+                console.log(e.message)
+            }
+            this.students()
+        },
+        openModal(){
+            this.id=0,
+            this.students.name='',
+            this.students.last_name='',
+            this.students.birth_date='',
+            this.students.gender='',
+            this.students.code=''
+        },
+        closeModal(){
+            this.modal=0
+        }
+    }
 
 }
 </script>
