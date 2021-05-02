@@ -2001,6 +2001,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -2110,7 +2111,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    "delete": function _delete(id) {
+    deleteById: function deleteById(id) {
       console.log(id);
     },
     showModal: function showModal(id) {
@@ -41418,7 +41419,7 @@ var render = function() {
     {
       staticClass: "modal fade",
       attrs: {
-        id: _vm.student.name + "-" + _vm.student.id,
+        id: "modal-" + _vm.student.id,
         tabindex: "-1",
         "aria-labelledby": _vm.student.name + "Modal",
         "aria-hidden": "true"
@@ -41740,45 +41741,43 @@ var render = function() {
       "div",
       { staticClass: "mb-3 row" },
       _vm._l(_vm.students, function(student) {
-        return _c("div", { key: student.id, staticClass: "col-sm-3" }, [
-          _c("div", { staticClass: "mb-4 shadow card" }, [
-            _c("div", { staticClass: "card-body" }, [
-              _c("h3", { staticClass: "card-title" }, [
-                _vm._v(_vm._s(student.full_name))
+        return _c(
+          "div",
+          { key: student.id, staticClass: "col-sm-3" },
+          [
+            _c("div", { staticClass: "mb-4 shadow card" }, [
+              _c("div", { staticClass: "card-body" }, [
+                _c("h3", { staticClass: "card-title" }, [
+                  _vm._v(_vm._s(student.full_name))
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "card-text" }, [
+                  _vm._v("Datos del estudiante:")
+                ])
               ]),
               _vm._v(" "),
-              _c("p", { staticClass: "card-text" }, [
-                _vm._v("Datos del estudiante:")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("ul", { staticClass: "list-group list-group-flush" }, [
-              _c("li", { staticClass: "list-group-item" }, [
-                _vm._v(
-                  "Genero: " +
-                    _vm._s(student.gender == "F" ? "Femenino" : "Masculino")
-                )
+              _c("ul", { staticClass: "list-group list-group-flush" }, [
+                _c("li", { staticClass: "list-group-item" }, [
+                  _vm._v(
+                    "Genero: " +
+                      _vm._s(student.gender == "F" ? "Femenino" : "Masculino")
+                  )
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "list-group-item" }, [
+                  _vm._v("Edad: " + _vm._s(student.age))
+                ])
               ]),
               _vm._v(" "),
-              _c("li", { staticClass: "list-group-item" }, [
-                _vm._v("Edad: " + _vm._s(student.age))
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "card-body" },
-              [
+              _c("div", { staticClass: "card-body" }, [
                 _c(
                   "button",
                   {
                     staticClass: "shadow btn btn-success",
-                    attrs: { href: "#", "data-toggle": "modal" },
+                    attrs: { "data-toggle": "modal" },
                     on: {
                       click: function($event) {
-                        return _vm.showModal(
-                          "#" + student.name + "-" + student.id
-                        )
+                        return _vm.showModal("#modal-" + student.id)
                       }
                     }
                   },
@@ -41791,13 +41790,15 @@ var render = function() {
                   1
                 ),
                 _vm._v(" "),
-                _c("ShowStudent", { attrs: { student: student } }),
-                _vm._v(" "),
                 _c(
                   "button",
                   {
                     staticClass: "shadow btn btn-danger",
-                    attrs: { href: "#" }
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteById(student.id)
+                      }
+                    }
                   },
                   [
                     _c("feather", {
@@ -41807,11 +41808,13 @@ var render = function() {
                   ],
                   1
                 )
-              ],
-              1
-            )
-          ])
-        ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("ShowStudent", { attrs: { student: student } })
+          ],
+          1
+        )
       }),
       0
     )

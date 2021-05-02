@@ -54,11 +54,12 @@
                     <li class="list-group-item">Edad: {{student.age}}</li>
                 </ul>
                 <div class="card-body">
-                    <button href="#" class="shadow btn btn-success" data-toggle="modal" @click="showModal(`#${student.name}-${student.id}`)"><feather type="eye" class="align-middle" size="20"></feather></button>
-                    <ShowStudent :student="student" />
-                    <button href="#" class="shadow btn btn-danger"><feather type="trash-2" class="align-middle" size="20"></feather></button>
+                    <button class="shadow btn btn-success" data-toggle="modal" @click="showModal(`#modal-${student.id}`)"><feather type="eye" class="align-middle" size="20"></feather></button>
+                    
+                    <button class="shadow btn btn-danger" @click="deleteById(student.id)"><feather type="trash-2" class="align-middle" size="20"></feather></button>
                 </div>
             </div>
+            <ShowStudent :student="student" />
         </div>        
     </div>
 </div>
@@ -127,7 +128,7 @@ export default {
             let data = response.data;
             this.students = data;
         },
-        delete(id){
+        deleteById(id){
             console.log(id);
         },
         showModal(id){
