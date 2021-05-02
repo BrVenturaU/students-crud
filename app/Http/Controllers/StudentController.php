@@ -19,12 +19,6 @@ use Illuminate\Http\Request;
 class StudentController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-      /**
     * @OA\Get(
     *     path="/students",
     *     summary="Muestra un listado de estudiantes paginado.",
@@ -66,7 +60,18 @@ class StudentController extends Controller
     *    ),
     *     @OA\Response(
     *         response=200,
-    *         description="Devuelve un listado de estudiantes."
+    *         description="Devuelve un listado de estudiantes.",
+    *            @OA\JsonContent(
+    *               @OA\Property(property="current_page", type="integer", example=1),
+    *               @OA\Property(property="total", type="integer", example=1),
+    *               @OA\Property(property="per_page", type="string", example="1"),
+    *               @OA\Property(property="last_page", type="integer", example=1),
+    *               @OA\Property(property="from", type="integer", example=1),
+    *               @OA\Property(property="to", type="integer", example=1),
+    *               @OA\Property(property="data", type="array", collectionFormat="multi",
+    *                    @OA\Items(ref="#/components/schemas/Student")
+    *               )
+    *            )
     *     ),
     *     @OA\Response(
     *         response="500",
