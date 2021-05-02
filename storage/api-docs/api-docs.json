@@ -259,6 +259,61 @@
                         "description": "Ha ocurrido un error."
                     }
                 }
+            },
+            "delete": {
+                "tags": [
+                    "Students"
+                ],
+                "summary": "Permite eliminar un estudiante.",
+                "operationId": "App\\Http\\Controllers\\StudentController::destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id del estudiante",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Devuelve una respuesta de eliminado.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Registro eliminado con éxito"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "El registro solicitado no existe.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "El registro solicitado no existe."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
             }
         }
     },

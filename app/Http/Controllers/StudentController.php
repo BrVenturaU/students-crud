@@ -173,17 +173,45 @@ class StudentController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Delete(
+    *     path="/students/{id}",
+    *     summary="Permite eliminar un estudiante.",
+    *     tags={"Students"},
+    *     @OA\Parameter(
+    *          name="id",
+    *          description="Id del estudiante",
+    *          in="path",
+    *          required = true,
+    *          @OA\Schema(
+    *              type="integer"
+    *          )
+    *    ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="Devuelve una respuesta de eliminado.",
+    *         @OA\JsonContent(
+    *           @OA\Property(property="message", type="string", example="Registro eliminado con éxito")
+    *         )
+    *     ),
+    *     @OA\Response(
+    *         response=404,
+    *         description="El registro solicitado no existe.",
+    *         @OA\JsonContent(
+    *           @OA\Property(property="message", type="string", example="El registro solicitado no existe.")
+    *         )
+    *     ),
+    *     @OA\Response(
+    *         response="500",
+    *         description="Ha ocurrido un error."
+    *     )
+    * )
+    */
     public function destroy($id)
     {
         $student = Student::find($id);
         if($student == null)
-            return ["message" => "El registro solicitado no existe."];
+            return response()->json(["message" => "El registro solicitado no existe."], 404);
         $student->delete();
-        return ["message" => "Registro eliminado con éxito."];
+        return response()->json(["message" => "Registro eliminado con éxito."], 200);
     }
 }
