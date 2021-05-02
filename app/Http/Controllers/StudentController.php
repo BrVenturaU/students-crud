@@ -12,9 +12,12 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $students = Student::all();
+        $code = $request->input('code');
+        $perPage = $request->input('perPage');
+        $order = filter_var($request->input('order'), FILTER_VALIDATE_BOOLEAN);
+        $students = Student::where('code', 'like', "%$code%")->orderBy('id', $order ? 'ASC' : 'DESC')->paginate($perPage)->toArray();
         return $students;
     }
 
