@@ -5,6 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
+
+/**
+* 
+    * @OA\Info(
+    *    title="API estudiantes",
+    *    version="1.0"
+    * )
+*
+* @OA\Server(url="http://127.0.0.1:8000/api")
+*/
+
 class StudentController extends Controller
 {
     /**
@@ -12,6 +23,57 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+      /**
+    * @OA\Get(
+    *     path="/students",
+    *     summary="Muestra un listado de estudiantes paginado.",
+    *     tags={"Students"},
+    *     @OA\Parameter(
+    *          name="code",
+    *          description="Código del estudiante",
+    *          in="query",
+    *          @OA\Schema(
+    *              type="string"
+    *          )
+    *    ),
+    *    @OA\Parameter(
+    *          name="page",
+    *          description="Página de datos",
+    *          in="query",
+    *          @OA\Schema(
+    *              type="integer",
+    *              default=1
+    *          )
+    *    ),
+    *    @OA\Parameter(
+    *          name="perPage",
+    *          description="Cantidad de datos por página",
+    *          in="query",
+    *          @OA\Schema(
+    *              type="integer",
+    *              default=4
+    *          )
+    *    ),
+    *    @OA\Parameter(
+    *          name="order",
+    *          description="Orden ascendiente (true) o descendiente (false)",
+    *          in="query",
+    *          @OA\Schema(
+    *              type="boolean",
+    *              default=true
+    *          )
+    *    ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="Devuelve un listado de estudiantes."
+    *     ),
+    *     @OA\Response(
+    *         response="500",
+    *         description="Ha ocurrido un error."
+    *     )
+    * )
+    */
     public function index(Request $request)
     {
         $code = $request->input('code');

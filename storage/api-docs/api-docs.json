@@ -1,0 +1,71 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API estudiantes",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000/api"
+        }
+    ],
+    "paths": {
+        "/students": {
+            "get": {
+                "tags": [
+                    "Students"
+                ],
+                "summary": "Muestra un listado de estudiantes paginado.",
+                "operationId": "App\\Http\\Controllers\\StudentController::index",
+                "parameters": [
+                    {
+                        "name": "code",
+                        "in": "query",
+                        "description": "Código del estudiante",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Página de datos",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "perPage",
+                        "in": "query",
+                        "description": "Cantidad de datos por página",
+                        "schema": {
+                            "type": "integer",
+                            "default": 4
+                        }
+                    },
+                    {
+                        "name": "order",
+                        "in": "query",
+                        "description": "Orden ascendiente (true) o descendiente (false)",
+                        "schema": {
+                            "type": "boolean",
+                            "default": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Devuelve un listado de estudiantes."
+                    },
+                    "500": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
