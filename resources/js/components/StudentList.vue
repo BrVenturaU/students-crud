@@ -7,13 +7,12 @@
                     <p class="card-text">Datos del estudiante:</p>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Código: {{student.code}}</li>
                     <li class="list-group-item">Genero: {{student.gender == 'F' ? 'Femenino' : 'Masculino'}}</li>
                     <li class="list-group-item">Edad: {{student.age}}</li>
-                    <li class="list-group-item">Fecha de nacimiento: {{student.birth_date}}</li>
                 </ul>
                 <div class="card-body">
-                    <button href="#" class="shadow btn btn-success"><feather type="eye" class="align-middle" size="20"></feather></button>
+                    <button href="#" class="shadow btn btn-success" data-toggle="modal" @click="showModal(`#${student.name}-${student.id}`)"><feather type="eye" class="align-middle" size="20"></feather></button>
+                    <ShowStudent :student="student" />
                     <button href="#" class="shadow btn btn-danger"><feather type="trash-2" class="align-middle" size="20"></feather></button>
                 </div>
             </div>
@@ -22,7 +21,11 @@
 </template>
 
 <script>
+import ShowStudent from './ShowStudent.vue';
 export default {
+    components:{
+        ShowStudent
+    },
     created(){
         this.get();
     },
@@ -36,6 +39,12 @@ export default {
             let response = await axios.get('students');
             let data = response.data;
             this.students = data;
+        },
+        delete(id){
+            console.log(id);
+        },
+        showModal(id){
+            $(id).modal('show');
         }
     },
 }
