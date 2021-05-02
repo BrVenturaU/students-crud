@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
 *
 * @OA\Schema(
-*   required={"password"},
 *   @OA\Xml(name="Student"),
 *   @OA\Property(property="id", type="integer", example="1"),
 *   @OA\Property(property="name", type="string", example="string"),

@@ -102,15 +102,76 @@
                         "description": "Ha ocurrido un error."
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Students"
+                ],
+                "summary": "Permite crear un estudiante.",
+                "operationId": "App\\Http\\Controllers\\StudentController::store",
+                "requestBody": {
+                    "description": "Objeto de solicitud de datos del estudiante.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "string"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "example": "string"
+                                    },
+                                    "birth_date": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2019-02-25"
+                                    },
+                                    "gender": {
+                                        "type": "string",
+                                        "maxLength": 1,
+                                        "example": "F"
+                                    },
+                                    "code": {
+                                        "type": "string",
+                                        "maxLength": 10,
+                                        "example": "1234567890"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Devuelve una respuesta de creado.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Registro creado con éxito"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
             }
         }
     },
     "components": {
         "schemas": {
             "Student": {
-                "required": [
-                    "password"
-                ],
                 "properties": {
                     "id": {
                         "type": "integer",

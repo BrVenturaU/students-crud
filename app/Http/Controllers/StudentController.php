@@ -89,26 +89,37 @@ class StudentController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Post(
+    *     path="/students",
+    *     summary="Permite crear un estudiante.",
+    *     tags={"Students"},
+    *     @OA\RequestBody(
+    *         required=true,
+    *         description="Objeto de solicitud de datos del estudiante.",
+    *         @OA\JsonContent(
+    *           @OA\Property(property="name", type="string", example="string"),
+    *           @OA\Property(property="last_name", type="string", example="string"),
+    *           @OA\Property(property="birth_date", type="string", format="date-time", example="2019-02-25"),
+    *           @OA\Property(property="gender", type="string", maxLength=1, example="F"),
+    *           @OA\Property(property="code", type="string", maxLength=10, example="1234567890"),
+    *         )
+    *     ),
+    *     @OA\Response(
+    *         response=201,
+    *         description="Devuelve una respuesta de creado.",
+    *         @OA\JsonContent(
+    *           @OA\Property(property="message", type="string", example="Registro creado con éxito")
+    *         )
+    *     ),
+    *     @OA\Response(
+    *         response="500",
+    *         description="Ha ocurrido un error."
+    *     )
+    * )
+    */
     public function store(Request $request)
     {
         //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $student = Student::find($id);
-        return $student;
     }
 
     /**
