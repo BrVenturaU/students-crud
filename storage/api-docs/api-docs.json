@@ -167,6 +167,99 @@
                     }
                 }
             }
+        },
+        "/students/{id}": {
+            "put": {
+                "tags": [
+                    "Students"
+                ],
+                "summary": "Permite crear un estudiante.",
+                "operationId": "App\\Http\\Controllers\\StudentController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id del estudiante",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Objeto de solicitud de datos del estudiante.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "string"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "example": "string"
+                                    },
+                                    "birth_date": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2019-02-25"
+                                    },
+                                    "gender": {
+                                        "type": "string",
+                                        "maxLength": 1,
+                                        "example": "F"
+                                    },
+                                    "code": {
+                                        "type": "string",
+                                        "maxLength": 10,
+                                        "example": "1234567890"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Devuelve una respuesta de actualizado.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Registro actualizado con éxito"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "El registro solicitado no existe.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "El registro solicitado no existe."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
         }
     },
     "components": {

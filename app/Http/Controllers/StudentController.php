@@ -123,12 +123,50 @@ class StudentController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Put(
+    *     path="/students/{id}",
+    *     summary="Permite crear un estudiante.",
+    *     tags={"Students"},
+    *     @OA\Parameter(
+    *          name="id",
+    *          description="Id del estudiante",
+    *          in="path",
+    *          required = true,
+    *          @OA\Schema(
+    *              type="integer"
+    *          )
+    *    ),
+    *     @OA\RequestBody(
+    *         required=true,
+    *         description="Objeto de solicitud de datos del estudiante.",
+    *         @OA\JsonContent(
+    *           @OA\Property(property="name", type="string", example="string"),
+    *           @OA\Property(property="last_name", type="string", example="string"),
+    *           @OA\Property(property="birth_date", type="string", format="date-time", example="2019-02-25"),
+    *           @OA\Property(property="gender", type="string", maxLength=1, example="F"),
+    *           @OA\Property(property="code", type="string", maxLength=10, example="1234567890"),
+    *         )
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="Devuelve una respuesta de actualizado.",
+    *         @OA\JsonContent(
+    *           @OA\Property(property="message", type="string", example="Registro actualizado con éxito")
+    *         )
+    *     ),
+    *     @OA\Response(
+    *         response=404,
+    *         description="El registro solicitado no existe.",
+    *         @OA\JsonContent(
+    *           @OA\Property(property="message", type="string", example="El registro solicitado no existe.")
+    *         )
+    *     ),
+    *     @OA\Response(
+    *         response="500",
+    *         description="Ha ocurrido un error."
+    *     )
+    * )
+    */
     public function update(Request $request, $id)
     {
         //
