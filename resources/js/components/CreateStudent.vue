@@ -24,6 +24,7 @@
                                     required 
                                     class="form-control" 
                                     placeholder="Nombre">
+                                    <span v-for="(error, index) of errors.name" :key="index" class="text-danger">{{error}}</span>
                             </div>
                             <div class="col">
                                 <label for="lastname">Apellido</label>
@@ -34,6 +35,7 @@
                                     required
                                     class="form-control" 
                                     placeholder="Apellido">
+                                    <span v-for="(error, index) of errors.last_name" :key="index" class="text-danger">{{error}}</span>
                             </div>
                         </div>
                         <div class="mt-3 row">
@@ -45,6 +47,7 @@
                                     v-model="student.birth_date"
                                     required
                                     class="form-control" >
+                                    <span v-for="(error, index) of errors.birth_date" :key="index" class="text-danger">{{error}}</span>
                             </div>
                         </div>
                         <div class="mt-3 row">
@@ -59,6 +62,7 @@
                                     <option value="F">Femenino</option>
                                     <option value="M">Masculino</option>
                                 </select>       
+                                <span v-for="(error, index) of errors.gender" :key="index" class="text-danger">{{error}}</span>
                             </div>
                             <div class="col">
                                 <label for="code">Codigo</label>
@@ -69,6 +73,7 @@
                                     required 
                                     class="form-control" 
                                     placeholder="Codigo de estudiante">
+                                    <span v-for="(error, index) of errors.code" :key="index" class="text-danger">{{error}}</span>
                             </div>
                         </div>
                     </form>
@@ -78,14 +83,12 @@
                         <button 
                             type="button" 
                             class="btn btn-secondary" 
-                            data-dismiss="modal"
-                            @click="closeModal();">
+                            data-dismiss="modal">
                             Cancelar
                         </button>
                         <button 
                             type="button" 
                             class="btn btn-primary"
-                            data-dismiss="modal"
                             @click="addStudent()">
                             Guardar
                         </button>
@@ -121,7 +124,8 @@ export default {
                 birth_date:'',
                 gender:'F',
                 code:''
-            }
+            },
+            errors: {name:[], last_name: [], birth_date:[], gender:[], code:[]} 
         }
     },
     methods: {
@@ -131,15 +135,36 @@ export default {
                 let response = await axios.post('students/', vm.student);
                 let data = response.data;
                 alert(data.message);
-                vm.$emit('onChangeStudent');
-            }
-            catch(e) {
-                console.log(e.message)
+                vm.$emit('onChangeStudent', vm.editStudent != undefined);
+            }catch (error) {
+                let errors = error.response.data.errors;
+                console.log(errors)
+                for (const key in errors) {
+                    if (Object.hasOwnProperty.call(errors, key)) {
+                        const element = errors[key];
+                        switch (key) {
+                            case 'name':
+                                vm.errors.name=element;
+                                break;
+                            case 'last_name':
+                                vm.errors.last_name=element;
+                                break;
+                            case 'birth_date':
+                                vm.errors.birth_date=element;
+                                break;
+                            case 'gender':
+                                vm.errors.gender=element;
+                                break;
+                            case 'code':
+                                vm.errors.code=element;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
             }
 
-        },
-        closeModal(){
-            this.modal=0
         }
     }
 

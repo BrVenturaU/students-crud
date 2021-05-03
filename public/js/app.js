@@ -1992,6 +1992,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'CreateStudent',
   props: {
@@ -2018,6 +2021,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         birth_date: '',
         gender: 'F',
         code: ''
+      },
+      errors: {
+        name: [],
+        last_name: [],
+        birth_date: [],
+        gender: [],
+        code: []
       }
     };
   },
@@ -2026,7 +2036,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var vm, response, data;
+        var vm, response, data, errors, key, element;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -2040,25 +2050,69 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 response = _context.sent;
                 data = response.data;
                 alert(data.message);
-                vm.$emit('onChangeStudent');
-                _context.next = 13;
+                vm.$emit('onChangeStudent', vm.editStudent != undefined);
+                _context.next = 35;
                 break;
 
               case 10:
                 _context.prev = 10;
                 _context.t0 = _context["catch"](1);
-                console.log(_context.t0.message);
+                errors = _context.t0.response.data.errors;
+                console.log(errors);
+                _context.t1 = _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().keys(errors);
 
-              case 13:
+              case 15:
+                if ((_context.t2 = _context.t1()).done) {
+                  _context.next = 35;
+                  break;
+                }
+
+                key = _context.t2.value;
+
+                if (!Object.hasOwnProperty.call(errors, key)) {
+                  _context.next = 33;
+                  break;
+                }
+
+                element = errors[key];
+                _context.t3 = key;
+                _context.next = _context.t3 === 'name' ? 22 : _context.t3 === 'last_name' ? 24 : _context.t3 === 'birth_date' ? 26 : _context.t3 === 'gender' ? 28 : _context.t3 === 'code' ? 30 : 32;
+                break;
+
+              case 22:
+                vm.errors.name = element;
+                return _context.abrupt("break", 33);
+
+              case 24:
+                vm.errors.last_name = element;
+                return _context.abrupt("break", 33);
+
+              case 26:
+                vm.errors.birth_date = element;
+                return _context.abrupt("break", 33);
+
+              case 28:
+                vm.errors.gender = element;
+                return _context.abrupt("break", 33);
+
+              case 30:
+                vm.errors.code = element;
+                return _context.abrupt("break", 33);
+
+              case 32:
+                return _context.abrupt("break", 33);
+
+              case 33:
+                _context.next = 15;
+                break;
+
+              case 35:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee, null, [[1, 10]]);
       }))();
-    },
-    closeModal: function closeModal() {
-      this.modal = 0;
     }
   }
 });
@@ -2371,6 +2425,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee3);
       }))();
+    },
+    onDataChange: function onDataChange(isUpdated) {
+      var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      if (isUpdated) $("#modal-edit-".concat(id)).modal('hide');else $('#modal-create').modal('hide');
+      this.get();
     },
     showModal: function showModal(id) {
       $(id).modal('show');
@@ -41777,194 +41836,263 @@ var render = function() {
               },
               [
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col" }, [
-                    _c("label", { attrs: { for: "name" } }, [_vm._v("Nombre")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.student.name,
-                          expression: "student.name"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        id: "name",
-                        type: "text",
-                        required: "",
-                        placeholder: "Nombre"
-                      },
-                      domProps: { value: _vm.student.name },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.student, "name", $event.target.value)
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col" }, [
-                    _c("label", { attrs: { for: "lastname" } }, [
-                      _vm._v("Apellido")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.student.last_name,
-                          expression: "student.last_name"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        id: "lastname",
-                        type: "text",
-                        required: "",
-                        placeholder: "Apellido"
-                      },
-                      domProps: { value: _vm.student.last_name },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.student,
-                            "last_name",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "mt-3 row" }, [
-                  _c("div", { staticClass: "col" }, [
-                    _c("label", { attrs: { for: "date" } }, [
-                      _vm._v("Fecha de nacimiento")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.student.birth_date,
-                          expression: "student.birth_date"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { id: "date", type: "date", required: "" },
-                      domProps: { value: _vm.student.birth_date },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.student,
-                            "birth_date",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "mt-3 row" }, [
-                  _c("div", { staticClass: "col" }, [
-                    _c("label", { attrs: { for: "inputState" } }, [
-                      _vm._v("Genero")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
+                  _c(
+                    "div",
+                    { staticClass: "col" },
+                    [
+                      _c("label", { attrs: { for: "name" } }, [
+                        _vm._v("Nombre")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
                         directives: [
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.student.gender,
-                            expression: "student.gender"
+                            value: _vm.student.name,
+                            expression: "student.name"
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { id: "inputState", required: "" },
+                        attrs: {
+                          id: "name",
+                          type: "text",
+                          required: "",
+                          placeholder: "Nombre"
+                        },
+                        domProps: { value: _vm.student.name },
                         on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.student, "name", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm._l(_vm.errors.name, function(error, index) {
+                        return _c(
+                          "span",
+                          { key: index, staticClass: "text-danger" },
+                          [_vm._v(_vm._s(error))]
+                        )
+                      })
+                    ],
+                    2
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col" },
+                    [
+                      _c("label", { attrs: { for: "lastname" } }, [
+                        _vm._v("Apellido")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.student.last_name,
+                            expression: "student.last_name"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "lastname",
+                          type: "text",
+                          required: "",
+                          placeholder: "Apellido"
+                        },
+                        domProps: { value: _vm.student.last_name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
                             _vm.$set(
                               _vm.student,
-                              "gender",
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
+                              "last_name",
+                              $event.target.value
                             )
                           }
                         }
-                      },
-                      [
-                        _c("option", { attrs: { selected: "" } }, [
-                          _vm._v("Seleccionar...")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "F" } }, [
-                          _vm._v("Femenino")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "M" } }, [
-                          _vm._v("Masculino")
-                        ])
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col" }, [
-                    _c("label", { attrs: { for: "code" } }, [_vm._v("Codigo")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.student.code,
-                          expression: "student.code"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        id: "code",
-                        type: "text",
-                        required: "",
-                        placeholder: "Codigo de estudiante"
-                      },
-                      domProps: { value: _vm.student.code },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
+                      }),
+                      _vm._v(" "),
+                      _vm._l(_vm.errors.last_name, function(error, index) {
+                        return _c(
+                          "span",
+                          { key: index, staticClass: "text-danger" },
+                          [_vm._v(_vm._s(error))]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mt-3 row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col" },
+                    [
+                      _c("label", { attrs: { for: "date" } }, [
+                        _vm._v("Fecha de nacimiento")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.student.birth_date,
+                            expression: "student.birth_date"
                           }
-                          _vm.$set(_vm.student, "code", $event.target.value)
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "date", type: "date", required: "" },
+                        domProps: { value: _vm.student.birth_date },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.student,
+                              "birth_date",
+                              $event.target.value
+                            )
+                          }
                         }
-                      }
-                    })
-                  ])
+                      }),
+                      _vm._v(" "),
+                      _vm._l(_vm.errors.birth_date, function(error, index) {
+                        return _c(
+                          "span",
+                          { key: index, staticClass: "text-danger" },
+                          [_vm._v(_vm._s(error))]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mt-3 row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col" },
+                    [
+                      _c("label", { attrs: { for: "inputState" } }, [
+                        _vm._v("Genero")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.student.gender,
+                              expression: "student.gender"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { id: "inputState", required: "" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.student,
+                                "gender",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
+                          }
+                        },
+                        [
+                          _c("option", { attrs: { selected: "" } }, [
+                            _vm._v("Seleccionar...")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "F" } }, [
+                            _vm._v("Femenino")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "M" } }, [
+                            _vm._v("Masculino")
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm._l(_vm.errors.gender, function(error, index) {
+                        return _c(
+                          "span",
+                          { key: index, staticClass: "text-danger" },
+                          [_vm._v(_vm._s(error))]
+                        )
+                      })
+                    ],
+                    2
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col" },
+                    [
+                      _c("label", { attrs: { for: "code" } }, [
+                        _vm._v("Codigo")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.student.code,
+                            expression: "student.code"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "code",
+                          type: "text",
+                          required: "",
+                          placeholder: "Codigo de estudiante"
+                        },
+                        domProps: { value: _vm.student.code },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.student, "code", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm._l(_vm.errors.code, function(error, index) {
+                        return _c(
+                          "span",
+                          { key: index, staticClass: "text-danger" },
+                          [_vm._v(_vm._s(error))]
+                        )
+                      })
+                    ],
+                    2
+                  )
                 ])
               ]
             )
@@ -41975,12 +42103,7 @@ var render = function() {
               "button",
               {
                 staticClass: "btn btn-secondary",
-                attrs: { type: "button", "data-dismiss": "modal" },
-                on: {
-                  click: function($event) {
-                    return _vm.closeModal()
-                  }
-                }
+                attrs: { type: "button", "data-dismiss": "modal" }
               },
               [
                 _vm._v(
@@ -41993,7 +42116,7 @@ var render = function() {
               "button",
               {
                 staticClass: "btn btn-primary",
-                attrs: { type: "button", "data-dismiss": "modal" },
+                attrs: { type: "button" },
                 on: {
                   click: function($event) {
                     return _vm.addStudent()
@@ -42173,7 +42296,14 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("CreateStudent", { attrs: { modalId: "modal-create" } }),
+      _c("CreateStudent", {
+        attrs: { modalId: "modal-create" },
+        on: {
+          onChangeStudent: function($event) {
+            return _vm.onDataChange($event)
+          }
+        }
+      }),
       _vm._v(" "),
       _c("form", { staticClass: "mb-4" }, [
         _c("div", { staticClass: "form-row align-items-center" }, [
@@ -42519,7 +42649,7 @@ var render = function() {
                     },
                     on: {
                       onChangeStudent: function($event) {
-                        return _vm.get()
+                        return _vm.onDataChange($event, student.id)
                       }
                     }
                   }),
