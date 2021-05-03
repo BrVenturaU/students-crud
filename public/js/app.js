@@ -1992,6 +1992,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'CreateStudent',
   props: {
@@ -2018,6 +2021,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         birth_date: '',
         gender: 'F',
         code: ''
+      },
+      errors: {
+        name: [],
+        last_name: [],
+        birth_date: [],
+        gender: [],
+        code: []
       }
     };
   },
@@ -2026,7 +2036,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var vm, response, data;
+        var vm, response, data, errors, key, element;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -2040,196 +2050,75 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 response = _context.sent;
                 data = response.data;
                 alert(data.message);
-                vm.$emit('onChangeStudent');
-                _context.next = 13;
+                vm.$emit('onChangeStudent', vm.editStudent != undefined);
+                _context.next = 35;
                 break;
 
               case 10:
                 _context.prev = 10;
                 _context.t0 = _context["catch"](1);
-                console.log(_context.t0.message);
+                errors = _context.t0.response.data.errors;
+                console.log(errors);
+                _context.t1 = _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().keys(errors);
 
-              case 13:
+              case 15:
+                if ((_context.t2 = _context.t1()).done) {
+                  _context.next = 35;
+                  break;
+                }
+
+                key = _context.t2.value;
+
+                if (!Object.hasOwnProperty.call(errors, key)) {
+                  _context.next = 33;
+                  break;
+                }
+
+                element = errors[key];
+                _context.t3 = key;
+                _context.next = _context.t3 === 'name' ? 22 : _context.t3 === 'last_name' ? 24 : _context.t3 === 'birth_date' ? 26 : _context.t3 === 'gender' ? 28 : _context.t3 === 'code' ? 30 : 32;
+                break;
+
+              case 22:
+                vm.errors.name = element;
+                return _context.abrupt("break", 33);
+
+              case 24:
+                vm.errors.last_name = element;
+                return _context.abrupt("break", 33);
+
+              case 26:
+                vm.errors.birth_date = element;
+                return _context.abrupt("break", 33);
+
+              case 28:
+                vm.errors.gender = element;
+                return _context.abrupt("break", 33);
+
+              case 30:
+                vm.errors.code = element;
+                return _context.abrupt("break", 33);
+
+              case 32:
+                return _context.abrupt("break", 33);
+
+              case 33:
+                _context.next = 15;
+                break;
+
+              case 35:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee, null, [[1, 10]]);
       }))();
-    },
-    closeModal: function closeModal() {
-      this.modal = 0;
     }
   }
 });
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/EditStudent.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/EditStudent.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'EditStudent',
-  data: function data() {
-    return {
-      students: {
-        name: '',
-        last_name: '',
-        birth_date: '',
-        gender: '',
-        code: ''
-      }
-    };
-  },
-  methods: {
-    // async addStudent(){
-    //     try {
-    //         this.axios
-    //         .post('students/' + this.students)
-    //         .then(respose => (
-    //             this.students = respose.data
-    //         ))
-    //         // const res = await axios.post('students/' + this.students);
-    //         // this.students = res.data;
-    //     }
-    //     catch(e) {
-    //         console.log(e.message)
-    //     }
-    //     this.students()
-    // },
-    openModal: function openModal() {
-      this.id = 0, this.students.name = '', this.students.last_name = '', this.students.birth_date = '', this.students.gender = '', this.students.code = '';
-    },
-    closeModal: function closeModal() {
-      this.modal = 0;
-    }
-  }
-});
-
-/***/ }),
-
-=======
->>>>>>> 6c2d099f763d877f058fdfe7740068253d23afcb
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ShowStudent.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ShowStudent.vue?vue&type=script&lang=js& ***!
@@ -2386,8 +2275,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-<<<<<<< HEAD
-=======
+//
 //
 //
 //
@@ -2395,7 +2283,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 
->>>>>>> 6c2d099f763d877f058fdfe7740068253d23afcb
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -2539,6 +2426,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee3);
       }))();
+    },
+    onDataChange: function onDataChange(isUpdated) {
+      var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      if (isUpdated) $("#modal-edit-".concat(id)).modal('hide');else $('#modal-create').modal('hide');
+      this.get();
     },
     showModal: function showModal(id) {
       $(id).modal('show');
@@ -41911,83 +41803,55 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function () {}
-var staticRenderFns = []
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/EditStudent.vue?vue&type=template&id=4e6c5194&":
-/*!***********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/EditStudent.vue?vue&type=template&id=4e6c5194& ***!
-  \***********************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
-/* harmony export */ });
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-<<<<<<< HEAD
-  return _c("div", { staticClass: "container" }, [
-    _c("section", [
-      _c(
-        "div",
-        {
-          staticClass: "modal fade",
-          attrs: {
-            id: "editModal",
-            tabindex: "-1",
-            "aria-labelledby": "editModalLabel",
-            "aria-hidden": "true"
-          }
-        },
-        [
-          _c("div", { staticClass: "modal-dialog modal-lg" }, [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c(
-                  "h4",
-                  {
-                    staticClass: "modal-title",
-                    attrs: { id: "editModalLabel" }
-                  },
-                  [_vm._v("Editar Estudiante")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: {
-                      type: "button",
-                      "data-dismiss": "modal",
-                      "aria-label": "Close"
-                    },
-                    on: {
-                      click: function($event) {
-                        return _vm.openModal()
-                      }
-                    }
-                  },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("×")
-                    ])
-                  ]
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: {
+        id: _vm.modalId,
+        tabindex: "-1",
+        "aria-labelledby": "createModalLabel",
+        "aria-hidden": "true"
+      }
+    },
+    [
+      _c("div", { staticClass: "modal-dialog modal-lg" }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _c("div", { staticClass: "modal-header" }, [
+            _c(
+              "h4",
+              { staticClass: "modal-title", attrs: { id: "createModalLabel" } },
+              [
+                _vm._v(
+                  _vm._s(_vm.editStudent != undefined ? "Editar" : "Crear") +
+                    " Estudiante"
                 )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("form", { staticClass: "needs-validation" }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col" }, [
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-body" }, [
+            _c(
+              "form",
+              {
+                staticClass: "needs-validation",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.addStudent()
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col" },
+                    [
                       _c("label", { attrs: { for: "name" } }, [
                         _vm._v("Nombre")
                       ]),
@@ -41997,8 +41861,8 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.students.name,
-                            expression: "students.name"
+                            value: _vm.student.name,
+                            expression: "student.name"
                           }
                         ],
                         staticClass: "form-control",
@@ -42008,19 +41872,32 @@ var render = function() {
                           required: "",
                           placeholder: "Nombre"
                         },
-                        domProps: { value: _vm.students.name },
+                        domProps: { value: _vm.student.name },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.$set(_vm.students, "name", $event.target.value)
+                            _vm.$set(_vm.student, "name", $event.target.value)
                           }
                         }
+                      }),
+                      _vm._v(" "),
+                      _vm._l(_vm.errors.name, function(error, index) {
+                        return _c(
+                          "span",
+                          { key: index, staticClass: "text-danger" },
+                          [_vm._v(_vm._s(error))]
+                        )
                       })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col" }, [
+                    ],
+                    2
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col" },
+                    [
                       _c("label", { attrs: { for: "lastname" } }, [
                         _vm._v("Apellido")
                       ]),
@@ -42030,8 +41907,8 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.students.last_name,
-                            expression: "students.last_name"
+                            value: _vm.student.last_name,
+                            expression: "student.last_name"
                           }
                         ],
                         staticClass: "form-control",
@@ -42041,25 +41918,38 @@ var render = function() {
                           required: "",
                           placeholder: "Apellido"
                         },
-                        domProps: { value: _vm.students.last_name },
+                        domProps: { value: _vm.student.last_name },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
                             _vm.$set(
-                              _vm.students,
+                              _vm.student,
                               "last_name",
                               $event.target.value
                             )
                           }
                         }
+                      }),
+                      _vm._v(" "),
+                      _vm._l(_vm.errors.last_name, function(error, index) {
+                        return _c(
+                          "span",
+                          { key: index, staticClass: "text-danger" },
+                          [_vm._v(_vm._s(error))]
+                        )
                       })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row mt-3" }, [
-                    _c("div", { staticClass: "col" }, [
+                    ],
+                    2
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mt-3 row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col" },
+                    [
                       _c("label", { attrs: { for: "date" } }, [
                         _vm._v("Fecha de nacimiento")
                       ]),
@@ -42069,31 +41959,44 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.students.birth_date,
-                            expression: "students.birth_date"
+                            value: _vm.student.birth_date,
+                            expression: "student.birth_date"
                           }
                         ],
                         staticClass: "form-control",
                         attrs: { id: "date", type: "date", required: "" },
-                        domProps: { value: _vm.students.birth_date },
+                        domProps: { value: _vm.student.birth_date },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
                             _vm.$set(
-                              _vm.students,
+                              _vm.student,
                               "birth_date",
                               $event.target.value
                             )
                           }
                         }
+                      }),
+                      _vm._v(" "),
+                      _vm._l(_vm.errors.birth_date, function(error, index) {
+                        return _c(
+                          "span",
+                          { key: index, staticClass: "text-danger" },
+                          [_vm._v(_vm._s(error))]
+                        )
                       })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row mt-3" }, [
-                    _c("div", { staticClass: "col" }, [
+                    ],
+                    2
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mt-3 row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col" },
+                    [
                       _c("label", { attrs: { for: "inputState" } }, [
                         _vm._v("Genero")
                       ]),
@@ -42105,8 +42008,8 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.students.gender,
-                              expression: "students.gender"
+                              value: _vm.student.gender,
+                              expression: "student.gender"
                             }
                           ],
                           staticClass: "form-control",
@@ -42122,7 +42025,7 @@ var render = function() {
                                   return val
                                 })
                               _vm.$set(
-                                _vm.students,
+                                _vm.student,
                                 "gender",
                                 $event.target.multiple
                                   ? $$selectedVal
@@ -42144,166 +42047,34 @@ var render = function() {
                             _vm._v("Masculino")
                           ])
                         ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col" }, [
+                      ),
+                      _vm._v(" "),
+                      _vm._l(_vm.errors.gender, function(error, index) {
+                        return _c(
+                          "span",
+                          { key: index, staticClass: "text-danger" },
+                          [_vm._v(_vm._s(error))]
+                        )
+                      })
+                    ],
+                    2
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col" },
+                    [
                       _c("label", { attrs: { for: "code" } }, [
                         _vm._v("Codigo")
                       ]),
                       _vm._v(" "),
                       _c("input", {
-=======
-  return _c(
-    "div",
-    {
-      staticClass: "modal fade",
-      attrs: {
-        id: _vm.modalId,
-        tabindex: "-1",
-        "aria-labelledby": "createModalLabel",
-        "aria-hidden": "true"
-      }
-    },
-    [
-      _c("div", { staticClass: "modal-dialog modal-lg" }, [
-        _c("div", { staticClass: "modal-content" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("div", { staticClass: "modal-body" }, [
-            _c(
-              "form",
-              {
-                staticClass: "needs-validation",
-                on: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                    return _vm.addStudent()
-                  }
-                }
-              },
-              [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col" }, [
-                    _c("label", { attrs: { for: "name" } }, [_vm._v("Nombre")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.student.name,
-                          expression: "student.name"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        id: "name",
-                        type: "text",
-                        required: "",
-                        placeholder: "Nombre"
-                      },
-                      domProps: { value: _vm.student.name },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.student, "name", $event.target.value)
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col" }, [
-                    _c("label", { attrs: { for: "lastname" } }, [
-                      _vm._v("Apellido")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.student.last_name,
-                          expression: "student.last_name"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        id: "lastname",
-                        type: "text",
-                        required: "",
-                        placeholder: "Apellido"
-                      },
-                      domProps: { value: _vm.student.last_name },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.student,
-                            "last_name",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "mt-3 row" }, [
-                  _c("div", { staticClass: "col" }, [
-                    _c("label", { attrs: { for: "date" } }, [
-                      _vm._v("Fecha de nacimiento")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.student.birth_date,
-                          expression: "student.birth_date"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { id: "date", type: "date", required: "" },
-                      domProps: { value: _vm.student.birth_date },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.student,
-                            "birth_date",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "mt-3 row" }, [
-                  _c("div", { staticClass: "col" }, [
-                    _c("label", { attrs: { for: "inputState" } }, [
-                      _vm._v("Genero")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
->>>>>>> 6c2d099f763d877f058fdfe7740068253d23afcb
                         directives: [
                           {
                             name: "model",
                             rawName: "v-model",
-<<<<<<< HEAD
-                            value: _vm.students.code,
-                            expression: "students.code"
+                            value: _vm.student.code,
+                            expression: "student.code"
                           }
                         ],
                         staticClass: "form-control",
@@ -42313,124 +42084,27 @@ var render = function() {
                           required: "",
                           placeholder: "Codigo de estudiante"
                         },
-                        domProps: { value: _vm.students.code },
+                        domProps: { value: _vm.student.code },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.$set(_vm.students, "code", $event.target.value)
+                            _vm.$set(_vm.student, "code", $event.target.value)
                           }
                         }
+                      }),
+                      _vm._v(" "),
+                      _vm._l(_vm.errors.code, function(error, index) {
+                        return _c(
+                          "span",
+                          { key: index, staticClass: "text-danger" },
+                          [_vm._v(_vm._s(error))]
+                        )
                       })
-                    ])
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-secondary",
-                    attrs: { type: "button", "data-dismiss": "modal" },
-                    on: {
-                      click: function($event) {
-                        return _vm.closeModal()
-                      }
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n                        Cancelar\n                    "
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [
-                    _vm._v(
-                      "\n                        Guardar\n                    "
-                    )
-                  ]
-=======
-                            value: _vm.student.gender,
-                            expression: "student.gender"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { id: "inputState", required: "" },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              _vm.student,
-                              "gender",
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            )
-                          }
-                        }
-                      },
-                      [
-                        _c("option", { attrs: { selected: "" } }, [
-                          _vm._v("Seleccionar...")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "F" } }, [
-                          _vm._v("Femenino")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "M" } }, [
-                          _vm._v("Masculino")
-                        ])
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col" }, [
-                    _c("label", { attrs: { for: "code" } }, [_vm._v("Codigo")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.student.code,
-                          expression: "student.code"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        id: "code",
-                        type: "text",
-                        required: "",
-                        placeholder: "Codigo de estudiante"
-                      },
-                      domProps: { value: _vm.student.code },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.student, "code", $event.target.value)
-                        }
-                      }
-                    })
-                  ])
+                    ],
+                    2
+                  )
                 ])
               ]
             )
@@ -42441,17 +42115,11 @@ var render = function() {
               "button",
               {
                 staticClass: "btn btn-secondary",
-                attrs: { type: "button", "data-dismiss": "modal" },
-                on: {
-                  click: function($event) {
-                    return _vm.closeModal()
-                  }
-                }
+                attrs: { type: "button", "data-dismiss": "modal" }
               },
               [
                 _vm._v(
                   "\n                        Cancelar\n                    "
->>>>>>> 6c2d099f763d877f058fdfe7740068253d23afcb
                 )
               ]
             ),
@@ -42460,7 +42128,7 @@ var render = function() {
               "button",
               {
                 staticClass: "btn btn-primary",
-                attrs: { type: "button", "data-dismiss": "modal" },
+                attrs: { type: "button" },
                 on: {
                   click: function($event) {
                     return _vm.addStudent()
@@ -42479,26 +42147,7 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "h4",
-        { staticClass: "modal-title", attrs: { id: "createModalLabel" } },
-        [_vm._v("Crear/Agregar Estudiante")]
-      )
-    ])
-<<<<<<< HEAD
-  ])
-}
 var staticRenderFns = []
-=======
-  }
-]
->>>>>>> 6c2d099f763d877f058fdfe7740068253d23afcb
 render._withStripped = true
 
 
@@ -42646,7 +42295,14 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("CreateStudent", { attrs: { modalId: "modal-create" } }),
+      _c("CreateStudent", {
+        attrs: { modalId: "modal-create" },
+        on: {
+          onChangeStudent: function($event) {
+            return _vm.onDataChange($event)
+          }
+        }
+      }),
       _vm._v(" "),
       _c("form", { staticClass: "mb-4" }, [
         _c("div", { staticClass: "form-row align-items-center" }, [
@@ -42992,7 +42648,7 @@ var render = function() {
                     },
                     on: {
                       onChangeStudent: function($event) {
-                        return _vm.get()
+                        return _vm.onDataChange($event, student.id)
                       }
                     }
                   }),
@@ -43015,99 +42671,6 @@ var render = function() {
                             "aria-atomic": "true",
                             "data-delay": "600"
                           }
-<<<<<<< HEAD
-                        }
-                      },
-                      [
-                        _c("feather", {
-                          staticClass: "align-middle",
-                          attrs: { type: "trash-2", size: "20" }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-warning",
-                        attrs: {
-                          "data-toggle": "modal",
-                          "data-target": "#editModal"
-                        }
-                      },
-                      [
-                        _c("feather", {
-                          staticClass: "align-middle",
-                          attrs: { type: "edit", size: "20" }
-                        })
-                      ],
-                      1
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("ShowStudent", { attrs: { student: student } }),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "bottom-0 right-0 p-3 position-fixed",
-                    staticStyle: { "z-index": "5", right: "0", bottom: "0" }
-                  },
-                  [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "toast hide",
-                        attrs: {
-                          id: "toast-" + student.id,
-                          role: "alert",
-                          "aria-live": "assertive",
-                          "aria-atomic": "true",
-                          "data-delay": "600"
-                        }
-                      },
-                      [
-                        _c(
-                          "div",
-                          { staticClass: "toast-header" },
-                          [
-                            _c("feather", {
-                              staticClass: "mr-2 align-middle text-success",
-                              attrs: { type: "check-circle", size: "20" }
-                            }),
-                            _vm._v(" "),
-                            _c("strong", { staticClass: "mr-auto" }, [
-                              _vm._v("App")
-                            ]),
-                            _vm._v(" "),
-                            _c("small", [_vm._v("Now")]),
-                            _vm._v(" "),
-                            _vm._m(0, true)
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "toast-body" }, [
-                          _vm._v(
-                            "\r\n                        " +
-                              _vm._s(_vm.message) +
-                              "\r\n                    "
-                          )
-                        ])
-                      ]
-                    )
-                  ]
-                )
-              ],
-              1
-            )
-          }),
-          0
-        )
-  ])
-=======
                         },
                         [
                           _c(
@@ -43150,7 +42713,6 @@ var render = function() {
     ],
     1
   )
->>>>>>> 6c2d099f763d877f058fdfe7740068253d23afcb
 }
 var staticRenderFns = [
   function() {
