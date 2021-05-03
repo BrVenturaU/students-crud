@@ -73,6 +73,7 @@
                     </button>
                     
                     <button class="shadow btn btn-danger" @click="deleteById(student.id)"><feather type="trash-2" class="align-middle" size="20"></feather></button>
+                    
                 </div>
             </div>
             <ShowStudent :student="student" />

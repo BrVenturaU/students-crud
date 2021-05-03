@@ -6,10 +6,10 @@
         aria-labelledby="createModalLabel" 
         aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
+            <div class="modal-content"> 
                 <!-- Encabezado del modal -->
                 <div class="modal-header">
-                    <h4 class="modal-title" id="createModalLabel">Crear/Agregar Estudiante</h4>
+                    <h4 class="modal-title" id="createModalLabel">{{editStudent != undefined ? 'Editar' : 'Crear'}} Estudiante</h4>
                 </div>
                 <!-- Cuerpo/Contenido del Modal -->
                 <div class="modal-body">
