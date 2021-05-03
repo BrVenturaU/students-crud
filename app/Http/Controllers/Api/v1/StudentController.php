@@ -120,10 +120,17 @@ class StudentController extends Controller
     */
     public function store(Request $request)
     {
-        /*
+        // requeridos
+        $this->validate($request, [
+            'name' => 'required',
+            'last_name' => 'required',
+            'birth_date' => 'required',
+            'gender' => 'required',
+            'code' => 'required'
+        ]);
+
         Student::create($request->all());
         return response()->json(["message" => "Registro creado con éxito."], 201);
-        */
     }
 
     /**
