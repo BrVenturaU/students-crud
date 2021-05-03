@@ -42466,7 +42466,7 @@ var render = function() {
                       _c(
                         "button",
                         {
-                          staticClass: "btn btn-warning",
+                          staticClass: "text-white btn btn-warning",
                           on: {
                             click: function($event) {
                               return _vm.showModal("#modal-edit-" + student.id)
@@ -42475,7 +42475,7 @@ var render = function() {
                         },
                         [
                           _c("feather", {
-                            staticClass: "mr-2 align-middle text-withe",
+                            staticClass: "align-middle",
                             attrs: { type: "edit", size: "20" }
                           })
                         ],
