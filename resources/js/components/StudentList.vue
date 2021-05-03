@@ -1,5 +1,14 @@
 <template>
 <div>
+    <!-- Boton para abrir el modal -> CreateStudent -->
+    <button 
+        class="mb-2 btn btn-success"     
+        data-toggle="modal" 
+        data-target="#modal-create" >
+        <feather type="plus" class="align-middle" size="20"></feather>
+        Crear/Agregar
+    </button>
+    <CreateStudent :modalId="'modal-create'"/>
     <form class="mb-4">
         <div class="form-row align-items-center">
             <div class="col col-sm-6">
@@ -59,6 +68,10 @@
                 <div class="card-body">
                     <button class="shadow btn btn-success" data-toggle="modal" @click="showModal(`#modal-${student.id}`)"><feather type="eye" class="align-middle" size="20"></feather></button>
                     
+                    <button class="text-white btn btn-warning" @click="showModal(`#modal-edit-${student.id}`)">
+                        <feather type="edit" class="align-middle" size="20"></feather>
+                    </button>
+                    
                     <button class="shadow btn btn-danger" @click="deleteById(student.id)"><feather type="trash-2" class="align-middle" size="20"></feather></button>
 
                     <button 
@@ -71,6 +84,7 @@
                 </div>
             </div>
             <ShowStudent :student="student" />
+            <CreateStudent :editStudent="student" :modalId="`modal-edit-${student.id}`" @onChangeStudent="get()" />
             <div class="bottom-0 right-0 p-3 position-fixed" style="z-index: 5; right: 0; bottom: 0;">
                 <div :id="`toast-${student.id}`" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="600">
                     <div class="toast-header">
@@ -93,9 +107,11 @@
 
 <script>
 import ShowStudent from './ShowStudent.vue';
+import CreateStudent from './CreateStudent.vue';
 export default {
     components:{
-        ShowStudent
+        ShowStudent,
+        CreateStudent
     },
     created(){
         let vm = this;

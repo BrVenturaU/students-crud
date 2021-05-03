@@ -106,10 +106,24 @@ class StudentController extends Controller
     *         )
     *     ),
     *     @OA\Response(
-    *         response=201,
-    *         description="Devuelve una respuesta de creado.",
+    *         response=200,
+    *         description="Devuelve una respuesta de éxito.",
     *         @OA\JsonContent(
-    *           @OA\Property(property="message", type="string", example="Registro creado con éxito")
+    *           @OA\Property(property="message", type="string", example="Cambios realizados con éxito.")
+    *         )
+    *     ),
+    *     @OA\Response(
+    *         response=201,
+    *         description="Devuelve una respuesta de éxito.",
+    *         @OA\JsonContent(
+    *           @OA\Property(property="message", type="string", example="Cambios realizados con éxito.")
+    *         )
+    *     ),
+    *     @OA\Response(
+    *         response=404,
+    *         description="El registro solicitado no existe.",
+    *         @OA\JsonContent(
+    *           @OA\Property(property="message", type="string", example="El registro solicitado no existe.")
     *         )
     *     ),
     *     @OA\Response(
@@ -128,9 +142,16 @@ class StudentController extends Controller
             'gender' => 'required',
             'code' => 'required'
         ]);
-
+        if($request->has('id')){
+            $student = Student::find($request->input('id'));
+            if($student == null)
+                return response()->json(["message" => "El registro solicitado no existe."], 404);
+            $student->update($request->all());
+            return response()->json(["message" => "Cambios realizados con éxito."], 200);
+        }
         Student::create($request->all());
-        return response()->json(["message" => "Registro creado con éxito."], 201);
+        return response()->json(["message" => "Cambios realizados con éxito."], 201);
+        
     }
 
     /**
