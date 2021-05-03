@@ -16,7 +16,7 @@ import VueFeather from 'vue-feather';
 Vue.use(VueAxios, axios);
 Vue.use(VueFeather);
 
-axios.defaults.baseURL = 'http://127.0.0.1:8000/api';
+axios.defaults.baseURL = 'http://127.0.0.1:8000/api/v1';
 
 /**
  * The following block of code may be used to automatically register your
