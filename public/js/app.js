@@ -2049,69 +2049,83 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 4:
                 response = _context.sent;
                 data = response.data;
+                vm.student = {
+                  name: '',
+                  last_name: '',
+                  birth_date: '',
+                  gender: 'F',
+                  code: ''
+                };
+                vm.errors = {
+                  name: [],
+                  last_name: [],
+                  birth_date: [],
+                  gender: [],
+                  code: []
+                };
                 alert(data.message);
                 vm.$emit('onChangeStudent', vm.editStudent != undefined);
-                _context.next = 35;
+                _context.next = 37;
                 break;
 
-              case 10:
-                _context.prev = 10;
+              case 12:
+                _context.prev = 12;
                 _context.t0 = _context["catch"](1);
                 errors = _context.t0.response.data.errors;
                 console.log(errors);
                 _context.t1 = _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().keys(errors);
 
-              case 15:
+              case 17:
                 if ((_context.t2 = _context.t1()).done) {
-                  _context.next = 35;
+                  _context.next = 37;
                   break;
                 }
 
                 key = _context.t2.value;
 
                 if (!Object.hasOwnProperty.call(errors, key)) {
-                  _context.next = 33;
+                  _context.next = 35;
                   break;
                 }
 
                 element = errors[key];
                 _context.t3 = key;
-                _context.next = _context.t3 === 'name' ? 22 : _context.t3 === 'last_name' ? 24 : _context.t3 === 'birth_date' ? 26 : _context.t3 === 'gender' ? 28 : _context.t3 === 'code' ? 30 : 32;
+                _context.next = _context.t3 === 'name' ? 24 : _context.t3 === 'last_name' ? 26 : _context.t3 === 'birth_date' ? 28 : _context.t3 === 'gender' ? 30 : _context.t3 === 'code' ? 32 : 34;
                 break;
-
-              case 22:
-                vm.errors.name = element;
-                return _context.abrupt("break", 33);
 
               case 24:
-                vm.errors.last_name = element;
-                return _context.abrupt("break", 33);
+                vm.errors.name = element;
+                return _context.abrupt("break", 35);
 
               case 26:
-                vm.errors.birth_date = element;
-                return _context.abrupt("break", 33);
+                vm.errors.last_name = element;
+                return _context.abrupt("break", 35);
 
               case 28:
-                vm.errors.gender = element;
-                return _context.abrupt("break", 33);
+                vm.errors.birth_date = element;
+                return _context.abrupt("break", 35);
 
               case 30:
-                vm.errors.code = element;
-                return _context.abrupt("break", 33);
+                vm.errors.gender = element;
+                return _context.abrupt("break", 35);
 
               case 32:
-                return _context.abrupt("break", 33);
+                vm.errors.code = element;
+                return _context.abrupt("break", 35);
 
-              case 33:
-                _context.next = 15;
-                break;
+              case 34:
+                return _context.abrupt("break", 35);
 
               case 35:
+                _context.next = 17;
+                break;
+
+              case 37:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 10]]);
+        }, _callee, null, [[1, 12]]);
       }))();
     }
   }

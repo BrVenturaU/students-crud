@@ -139,7 +139,7 @@ class StudentController extends Controller
             'name' => 'required|max:50',
             'last_name' => 'required|max:50',
             'birth_date' => 'required|date_format:Y-m-d',
-            'gender' => 'required|in: F: M',
+            'gender' => 'required|in:M,F',
             'code' => 'required|max:10'
         ]);
         if($request->has('id')){

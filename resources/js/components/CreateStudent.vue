@@ -134,6 +134,14 @@ export default {
             try {
                 let response = await axios.post('students/', vm.student);
                 let data = response.data;
+                vm.student = {
+                    name: '',
+                    last_name:'',
+                    birth_date:'',
+                    gender:'F',
+                    code:''
+                }
+                vm.errors = {name:[], last_name: [], birth_date:[], gender:[], code:[]} ;
                 alert(data.message);
                 vm.$emit('onChangeStudent', vm.editStudent != undefined);
             }catch (error) {
