@@ -76,7 +76,7 @@
                 </div>
             </div>
             <ShowStudent :student="student" />
-            <CreateStudent :editStudent="student" :modalId="`modal-edit-${student.id}`" />
+            <CreateStudent :editStudent="student" :modalId="`modal-edit-${student.id}`" @onChangeStudent="get()" />
             <div class="bottom-0 right-0 p-3 position-fixed" style="z-index: 5; right: 0; bottom: 0;">
                 <div :id="`toast-${student.id}`" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="600">
                     <div class="toast-header">

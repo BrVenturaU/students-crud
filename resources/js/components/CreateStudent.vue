@@ -105,18 +105,17 @@ export default {
     created(){
         let vm = this;
         if(vm.editStudent != undefined){
-            vm.student.method = 'PUT';
-            this.student.name = vm.editStudent.name;
-            this.student.last_name = vm.editStudent.last_name;
-            this.student.birth_date = vm.editStudent.birth_date;
-            this.student.gender = vm.editStudent.gender;
-            this.student.code = vm.editStudent.code;
+            vm.student.id = vm.editStudent.id;
+            vm.student.name = vm.editStudent.name;
+            vm.student.last_name = vm.editStudent.last_name;
+            vm.student.birth_date = vm.editStudent.birth_date;
+            vm.student.gender = vm.editStudent.gender;
+            vm.student.code = vm.editStudent.code;
         }
     },
     data () {
         return {
             student: {
-                method: 'POST',
                 name: '',
                 last_name:'',
                 birth_date:'',
@@ -127,19 +126,17 @@ export default {
     },
     methods: {
         async addStudent(){
+            let vm = this;
             try {
-                this.axios
-                .post('students/' + this.student)
-                .then(respose => (
-                    this.students = respose.data
-                ))
-                // const res = await axios.post('students/' + this.students);
-                // this.students = res.data;
+                let response = await axios.post('students/', vm.student);
+                let data = response.data;
+                alert(data.message);
+                vm.$emit('onChangeStudent');
             }
             catch(e) {
                 console.log(e.message)
             }
-            // this.students()
+
         },
         closeModal(){
             this.modal=0

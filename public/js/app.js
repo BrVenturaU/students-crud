@@ -2002,18 +2002,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var vm = this;
 
     if (vm.editStudent != undefined) {
-      vm.student.method = 'PUT';
-      this.student.name = vm.editStudent.name;
-      this.student.last_name = vm.editStudent.last_name;
-      this.student.birth_date = vm.editStudent.birth_date;
-      this.student.gender = vm.editStudent.gender;
-      this.student.code = vm.editStudent.code;
+      vm.student.id = vm.editStudent.id;
+      vm.student.name = vm.editStudent.name;
+      vm.student.last_name = vm.editStudent.last_name;
+      vm.student.birth_date = vm.editStudent.birth_date;
+      vm.student.gender = vm.editStudent.gender;
+      vm.student.code = vm.editStudent.code;
     }
   },
   data: function data() {
     return {
       student: {
-        method: 'POST',
         name: '',
         last_name: '',
         birth_date: '',
@@ -2027,27 +2026,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var vm, response, data;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                try {
-                  _this.axios.post('students/' + _this.student).then(function (respose) {
-                    return _this.students = respose.data;
-                  }); // const res = await axios.post('students/' + this.students);
-                  // this.students = res.data;
+                vm = _this;
+                _context.prev = 1;
+                _context.next = 4;
+                return axios.post('students/', vm.student);
 
-                } catch (e) {
-                  console.log(e.message);
-                } // this.students()
+              case 4:
+                response = _context.sent;
+                data = response.data;
+                alert(data.message);
+                vm.$emit('onChangeStudent');
+                _context.next = 13;
+                break;
 
+              case 10:
+                _context.prev = 10;
+                _context.t0 = _context["catch"](1);
+                console.log(_context.t0.message);
 
-              case 1:
+              case 13:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, null, [[1, 10]]);
       }))();
     },
     closeModal: function closeModal() {
@@ -42509,6 +42516,11 @@ var render = function() {
                     attrs: {
                       editStudent: student,
                       modalId: "modal-edit-" + student.id
+                    },
+                    on: {
+                      onChangeStudent: function($event) {
+                        return _vm.get()
+                      }
                     }
                   }),
                   _vm._v(" "),
