@@ -12,9 +12,12 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $students = Student::all();
+        $code = $request->input('code');
+        $perPage = $request->input('perPage');
+        $order = filter_var($request->input('order'), FILTER_VALIDATE_BOOLEAN);
+        $students = Student::where('code', 'like', "%$code%")->orderBy('id', $order ? 'ASC' : 'DESC')->paginate($perPage)->toArray();
         return $students;
     }
 
@@ -26,7 +29,20 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        // requeridos
+        $this->validate($request, [
+            'name' => 'required|max:50',
+            'last_name' => 'required|max:50',
+            'birth_date' => 'required|date_format:Y-m-d',
+            'gender' => 'required|in: F, M',
+            'code' => 'required|max:10'
+        ]);
+
+        $students = Student::all();
+        
+        $students->save();
+        return response()->json();
     }
 
     /**
@@ -61,6 +77,10 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $student = Student::find($id);
+        if($student == null)
+            return ["message" => "El registro solicitado no existe."];
+        $student->delete();
+        return ["message" => "Registro eliminado con éxito."];
     }
 }
