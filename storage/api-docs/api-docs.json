@@ -146,15 +146,47 @@
                     }
                 },
                 "responses": {
-                    "201": {
-                        "description": "Devuelve una respuesta de creado.",
+                    "200": {
+                        "description": "Devuelve una respuesta de éxito.",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Registro creado con éxito"
+                                            "example": "Cambios realizados con éxito."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Devuelve una respuesta de éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cambios realizados con éxito."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "El registro solicitado no existe.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "El registro solicitado no existe."
                                         }
                                     },
                                     "type": "object"

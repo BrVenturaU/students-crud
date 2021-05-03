@@ -7,9 +7,11 @@
 
 <script>
 import StudentList from './components/StudentList.vue'
+import CreateStudent from './components/CreateStudent.vue'
     export default {
         components:{
-            StudentList
+            StudentList,
+            CreateStudent
         }
     }
 </script>
