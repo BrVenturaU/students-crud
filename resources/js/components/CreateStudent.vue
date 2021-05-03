@@ -21,7 +21,7 @@
                 <div class="modal-content">
                     <!-- Encabezado del modal -->
                     <div class="modal-header">
-                        <h4 class="modal-title" id="createModalLabel">Crear/Agregar Estudiante</h4>
+                        <h4 class="modal-title" id="createModalLabel">{{editStudent != undefined 'Editar' : 'Crear'}} Estudiante</h4>
                         <button 
                             type="button" 
                             class="close" 
