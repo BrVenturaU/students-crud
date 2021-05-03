@@ -136,11 +136,11 @@ class StudentController extends Controller
     {
         // requeridos
         $this->validate($request, [
-            'name' => 'required',
-            'last_name' => 'required',
-            'birth_date' => 'required',
-            'gender' => 'required',
-            'code' => 'required'
+            'name' => 'required|max:50',
+            'last_name' => 'required|max:50',
+            'birth_date' => 'required|date_format:Y-m-d',
+            'gender' => 'required|in: F: M',
+            'code' => 'required|max:10'
         ]);
         if($request->has('id')){
             $student = Student::find($request->input('id'));
